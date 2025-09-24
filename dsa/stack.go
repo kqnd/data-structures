@@ -2,16 +2,22 @@ package dsa
 
 import "fmt"
 
-
-type Node struct {
-	Value int
-	Next *Node
-}
-
 type Stack struct {
 	Size uint8
 	Top *Node
 }
+
+// QUICK USAGE
+// func main() {
+// 	stack := dsa.CreateStack(1)
+// 	stack.Add(2)
+// 	stack.Add(3)
+// 	stack.Add(4)
+// 	node := *stack.Pop()
+// 	stack.Show()
+
+// 	fmt.Println(node.Value)
+// }
 
 func CreateStack(value int) *Stack {
 	topNode := Node{
@@ -66,18 +72,7 @@ func (s *Stack) Show() {
 		result += fmt.Sprintf("%d -> ", top.Value)
 	}
 
+	result += "None"
+
 	fmt.Println(result)
 }
-
-
-// QUICK USAGE
-// func main() {
-// 	stack := dsa.CreateStack(1)
-// 	stack.Add(2)
-// 	stack.Add(3)
-// 	stack.Add(4)
-// 	node := *stack.Pop()
-// 	stack.Show()
-
-// 	fmt.Println(node.Value)
-// }
