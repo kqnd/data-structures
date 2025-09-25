@@ -50,10 +50,45 @@ func (t *Tree) Add(value int) {
 	t.Size++
 }
 
-func addRecursively(node *TreeNode, value int) {
+func (t *Tree) Remove(value int) {
+	t.Root = removeRecursively(t.Root, value)
+	t.Size--
+}
+
+func removeRecursively(node *TreeNode, value int) *TreeNode {
 	if node == nil {
-		return
+		return nil
 	}
+
+	if value > node.Value {
+		node.Right = removeRecursively(node.Right, value)
+	} else if value < node.Value {
+		node.Left = removeRecursively(node.Left, value)
+	} else {
+		if node.Left == nil && node.Right == nil {
+			return nil
+		}
+		if node.Left == nil {
+			return node.Right
+		}
+		if node.Right == nil {
+			return node.Left
+		}
+		successor := findMin(node.Right)
+		node.Value = successor.Value
+		node.Right = removeRecursively(node.Right, successor.Value)
+	}
+	return node
+}
+
+func findMin(node *TreeNode) *TreeNode {
+	for node.Left != nil {
+		node = node.Left
+	}
+	return node
+}
+
+func addRecursively(node *TreeNode, value int) {
 
 	newNode := &TreeNode{
 		Value: value,
