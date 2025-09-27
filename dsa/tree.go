@@ -7,14 +7,28 @@ import (
 
 type TreeNode struct {
 	Value int
-	Left *TreeNode
-	Right *TreeNode
+	Left, Right *TreeNode
 }
 
 type Tree struct {
 	Size int
 	Root *TreeNode
 }
+
+
+// QUICK USAGE
+// func main() {
+// 	tree := dsa.CreateTree(5)
+// 	tree.Add(5)
+// 	tree.Add(5)
+// 	tree.Add(5)
+// 	tree.Add(5)
+// 	tree.Add(1)
+// 	tree.Add(1)
+// 	tree.Add(3)
+// 	tree.Show()
+// }
+
 
 func CreateTree(value int) *Tree {
 	return &Tree{
@@ -115,9 +129,9 @@ func addRecursively(node *TreeNode, value int) {
 	nodeValue := node.Value
 
 	if value == nodeValue {
-		temp := node.Left
-		node.Left = newNode
-		newNode.Left = temp
+		temp := node.Right
+		node.Right = newNode
+		newNode.Right = temp
 		return
 	}
 
