@@ -1,6 +1,8 @@
 package main
 
-import "github.com/enjineks/dsa/dsa"
+import (
+	"github.com/kqnd/dsa/dsa"
+)
 
 func main() {
 	tree := dsa.CreateTree(5)

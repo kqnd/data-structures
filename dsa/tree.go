@@ -81,6 +81,22 @@ func removeRecursively(node *TreeNode, value int) *TreeNode {
 	return node
 }
 
+func (t *Tree) Search(value int) *TreeNode {
+	return searchRecursively(t.Root, value)
+}
+
+func searchRecursively(node *TreeNode, value int) *TreeNode {
+	if node == nil || node.Value == value {
+		return node
+	}
+
+	if value > node.Value {
+		return searchRecursively(node.Right, value)
+	} else {
+		return searchRecursively(node.Left, value)
+	}
+}
+
 func findMin(node *TreeNode) *TreeNode {
 	for node.Left != nil {
 		node = node.Left
@@ -97,6 +113,14 @@ func addRecursively(node *TreeNode, value int) {
 	}
 
 	nodeValue := node.Value
+
+	if value == nodeValue {
+		temp := node.Left
+		node.Left = newNode
+		newNode.Left = temp
+		return
+	}
+
 	if value > nodeValue {
 		if node.Right == nil {
 			node.Right = newNode
