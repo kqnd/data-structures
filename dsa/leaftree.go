@@ -24,6 +24,34 @@ type LeafTree struct {
 
 var rootKey = utils.Generate(200, 1000)
 
+// QUICK USAGE
+// func main() {
+	
+// 	book1 := dsa.CreateBook("The Great Gatsby")
+// 	book2 := dsa.CreateBook("1984")
+
+// 	lt := dsa.CreateLeafTree()
+// 	lt.Add(nil)
+// 	lt.Add(nil)
+// 	lt.Add(nil)
+// 	lt.Add(nil)
+// 	bookOneDB := lt.Add(book1)
+// 	bookTwoDB := lt.Add(book2)
+// 	lt.Show()
+
+// 	bookByKey := lt.Find(bookOneDB.Key)
+// 	bookByID := lt.FindByBookID(bookTwoDB.Leaf.ID)
+
+// 	if bookByKey != nil {
+// 		fmt.Printf("FIND_KEY: [%d] Book: %s\n", bookOneDB.Key, bookByKey.Leaf.Title)
+// 	}
+
+// 	if bookByID != nil {
+// 		fmt.Printf("FIND_BY_ID: [%d] Book: %s\n", bookTwoDB.Key, bookByID.Leaf.Title)
+// 	}
+
+// }
+
 func CreateLeafTree() *LeafTree {
 	return &LeafTree{
 		Root: &LeafTreeNode{
@@ -72,6 +100,8 @@ func addLeafRecursively(node *LeafTreeNode, key int, book *Book) *LeafTreeNode {
 	return node
 }
 
+// 1 
+
 func (lt *LeafTree) Find(key int) *LeafTreeNode {
 	return findRecursively(lt.Root, key)
 }
@@ -119,9 +149,7 @@ func printLeafNode(node *LeafTreeNode, depth int) {
 	}
 
 	printLeafNode(node.Right, depth+1)
-
 	fmt.Printf("%s%d%s\n", strings.Repeat("    ", depth), node.Key, leafInfo)
-
 	printLeafNode(node.Left, depth+1)
 }
 
@@ -131,5 +159,8 @@ func (lt *LeafTree) Show() {
 		fmt.Println("Tree is empty")
 		return
 	}
+	
+	fmt.Println("========= LEAF TREE =========")
 	printLeafNode(lt.Root, 0)
+	fmt.Println("========= END LEAF TREE =========")
 }
